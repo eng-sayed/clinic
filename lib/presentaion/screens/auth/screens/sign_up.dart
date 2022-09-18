@@ -46,15 +46,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 children: [
                   CustomText(
                     "Sign Up",
-                    fontsize: 35,
+                    fontsize: 65,
                     color: AppColors.black,
                     weight: FontWeight.bold,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const SizedBox(
-                    height: 10,
                   ),
                   LoginTextField(
                     keyboardType: TextInputType.text,

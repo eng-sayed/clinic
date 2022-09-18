@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/themes/colors.dart';
 import '../../components/navigator.dart';
+import '../../layout/layout.dart';
 import '../home/home.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -81,6 +82,6 @@ class _SplashScreenState extends State<SplashScreen> {
     );
     Utiles.UID.isEmpty
         ? navigateReplacement(context: context, route: SignIn())
-        : navigateReplacement(context: context, route: Home());
+        : navigateReplacement(context: context, route: HomeLayout());
   }
 }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:clinic/core/utils/utiles.dart';
 import 'package:clinic/data/local/sharedpreferences.dart';
@@ -11,6 +13,7 @@ import '../../../../domain/models/patient_model.dart';
 import '../../../components/alerts.dart';
 import '../../../components/myLoading.dart';
 import '../../../components/navigator.dart';
+import '../../../layout/layout.dart';
 import '../../home/home.dart';
 
 part 'auth_state.dart';
@@ -41,7 +44,20 @@ class AuthCubit extends Cubit<AuthState> {
     final user = await signInWithGoogle();
     Utiles.UID = user.user!.uid;
     CacheHelper.saveData(key: 'uid', value: Utiles.UID);
-    navigateReplacement(context: context, route: Home());
+    MyLoading.show(context);
+
+    await firebaseFirestore
+        .collection("patient")
+        .doc(Utiles.UID)
+        .get()
+        .then((value) {
+      final user = PatientModel.fromMap(value.data()!);
+      CacheHelper.saveData(key: 'user', value: jsonEncode(user));
+      Utiles.currentUser = user;
+    });
+    MyLoading.dismis(context);
+
+    navigateReplacement(context: context, route: HomeLayout());
   }
 
   registerByGoogle(context) async {
@@ -51,9 +67,10 @@ class AuthCubit extends Cubit<AuthState> {
         id: user.user!.uid,
         fcmToken: Utiles.FCMToken,
         role: 'patient',
-        phone: user.user!.phoneNumber);
+        phone: user.user!.phoneNumber,
+        email: user.user!.email);
     await saveDataUser(user, patientModel);
-    navigateReplacement(context: context, route: Home());
+    navigateReplacement(context: context, route: HomeLayout());
   }
 
   register(PatientModel patientModel, String password, context) async {
@@ -69,7 +86,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(RegisetrSucess());
       OverLays.snack(context,
           text: "Register Succed", state: SnakState.success);
-      navigateReplacement(context: context, route: Home());
+      navigateReplacement(context: context, route: HomeLayout());
 
       return Future.sync(() => userCredential);
     } on FirebaseAuthException catch (e) {
@@ -92,7 +109,9 @@ class AuthCubit extends Cubit<AuthState> {
             .copyWith(id: userCredential.user!.uid, role: 'patient')
             .toMap());
     Utiles.UID = userCredential.user!.uid;
+    Utiles.currentUser = patientModel;
     CacheHelper.saveData(key: 'uid', value: Utiles.UID);
+    CacheHelper.saveData(key: 'user', value: jsonEncode(patientModel));
   }
 
   Future login(String email, String password, context) async {
@@ -109,10 +128,22 @@ class AuthCubit extends Cubit<AuthState> {
         MyLoading.dismis(context);
         Utiles.UID = userCredential.user!.uid;
         CacheHelper.saveData(key: 'uid', value: Utiles.UID);
+
+        await firebaseFirestore
+            .collection("patient")
+            .doc(Utiles.UID)
+            .get()
+            .then((value) {
+          final user = PatientModel.fromMap(value.data()!);
+          CacheHelper.saveData(key: 'user', value: jsonEncode(user));
+          Utiles.currentUser = user;
+        });
         emit(Loginsucess());
+        MyLoading.dismis(context);
+
         OverLays.snack(context,
             text: "Login Successed", state: SnakState.success);
-        navigateReplacement(context: context, route: Home());
+        navigateReplacement(context: context, route: HomeLayout());
       }
     } on FirebaseAuthException catch (e) {
       MyLoading.dismis(context);

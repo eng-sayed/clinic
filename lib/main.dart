@@ -1,5 +1,6 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:clinic/presentaion/screens/auth/cubit/auth_cubit.dart';
+import 'package:clinic/presentaion/screens/profile/cubit/profile_cubit.dart';
 import 'package:clinic/presentaion/screens/splash/splash_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -11,7 +12,9 @@ import 'core/themes/colors.dart';
 import 'core/utils/firebase_message.dart';
 import 'data/local/sharedpreferences.dart';
 import 'firebase_options.dart';
+import 'presentaion/layout/cubit/layout_cubit.dart';
 import 'presentaion/screens/auth/screens/sign_up.dart';
+import 'presentaion/screens/splash/cubit/splash_cubit.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -47,6 +50,15 @@ class MyApp extends StatelessWidget {
         BlocProvider<AuthCubit>(
           create: (context) => AuthCubit(),
         ),
+        BlocProvider<SplashCubit>(
+          create: (context) => SplashCubit(),
+        ),
+        BlocProvider<HomeLayoutCubit>(
+          create: (context) => HomeLayoutCubit(),
+        ),
+        BlocProvider<ProfileCubit>(
+          create: (context) => ProfileCubit(),
+        ),
       ],
       child: MaterialApp(
         builder: (_, child) {
@@ -64,6 +76,7 @@ class MyApp extends StatelessWidget {
             fontFamily: "cairo",
             backgroundColor: AppColors.lightGreybackgound,
             appBarTheme: AppBarTheme(
+                backgroundColor: AppColors.primiry,
                 iconTheme: IconThemeData(color: Colors.white),
                 elevation: 0,
                 titleTextStyle: TextStyle(color: Colors.white)),

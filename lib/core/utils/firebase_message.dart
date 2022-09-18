@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:clinic/core/utils/utiles.dart';
 import 'package:clinic/data/local/sharedpreferences.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
+import '../../domain/models/patient_model.dart';
 import '../../main.dart';
 
 class FBMessging {
@@ -44,6 +47,10 @@ class FBMessging {
       CacheHelper.saveData(key: 'fcmtoken', value: token ?? '');
       Utiles.FCMToken = token!;
       Utiles.UID = CacheHelper.loadData(key: 'uid') ?? '';
+      print(
+          PatientModel.fromJson(jsonDecode(CacheHelper.loadData(key: 'user'))));
+      Utiles.currentUser =
+          PatientModel.fromJson(jsonDecode(CacheHelper.loadData(key: 'user')));
     });
   }
 }

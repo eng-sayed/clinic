@@ -12,17 +12,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.logout),
-          onPressed: () async {
-            await FirebaseAuth.instance.signOut();
-            CacheHelper.removeData(key: 'fcmtoken');
-            CacheHelper.removeData(key: 'uid');
-            navigateReplacement(context: context, route: SignUpPage());
-          },
-        ),
-      ),
+      appBar: AppBar(),
     );
   }
 }

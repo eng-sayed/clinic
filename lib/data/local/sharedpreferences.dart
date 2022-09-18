@@ -1,3 +1,5 @@
+import 'package:clinic/core/utils/utiles.dart';
+import 'package:clinic/domain/models/patient_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheHelper {
@@ -28,5 +30,12 @@ class CacheHelper {
     required String key,
   }) async {
     return await sharedPreferences.remove(key);
+  }
+
+  static Future<bool> resetShared() async {
+    Utiles.UID = '';
+    Utiles.FCMToken = '';
+    Utiles.currentUser = PatientModel();
+    return await sharedPreferences.clear();
   }
 }
