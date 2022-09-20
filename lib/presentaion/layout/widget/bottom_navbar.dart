@@ -25,9 +25,9 @@ class CustomBottomNavBar extends StatelessWidget {
         //   iconSize: 20,
         elevation: 0,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "home".tr()),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "الرئيسيه"),
           BottomNavigationBarItem(
-              icon: Icon(Icons.category), label: "profile".tr()),
+              icon: Icon(Icons.category), label: "الملف الشخصي"),
         ],
         onTap: (i) {
           // cubit.tabController.animateTo(i);

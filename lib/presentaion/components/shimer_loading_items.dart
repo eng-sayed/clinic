@@ -1,0 +1,208 @@
+import 'package:carousel_slider/carousel_options.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:clinic/core/utils/responsive.dart';
+import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
+
+class TrendingLoadingItem extends StatelessWidget {
+  const TrendingLoadingItem({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CarouselSlider(
+      options: CarouselOptions(
+        height: 350,
+        autoPlay: true,
+        viewportFraction: 0.7,
+        aspectRatio: 16 / 9,
+        enlargeCenterPage: true,
+        enlargeStrategy: CenterPageEnlargeStrategy.scale,
+      ),
+      items: List.generate(
+          5,
+          (index) => Card(
+                  child: Shimmer.fromColors(
+                baseColor: Colors.grey.shade300,
+                highlightColor: Colors.grey.shade100,
+                enabled: true,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      width: 250.0,
+                      height: 200.0,
+                      color: Colors.green,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                    ),
+                    // const Padding(
+                    //   padding: EdgeInsets.symmetric(vertical: 2.0),
+                    // ),
+                    Container(
+                      width: 240,
+                      height: 20,
+                      color: Colors.green,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 4),
+                    ),
+                    Container(
+                      width: 70.0,
+                      height: 20,
+                      color: Colors.green,
+                    )
+                  ],
+                ),
+              ))),
+    );
+  }
+}
+
+class ProductsLoadnigItem extends StatelessWidget {
+  const ProductsLoadnigItem({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade100,
+      enabled: true,
+      child: GridView.builder(
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+        ),
+        itemCount: 4,
+        itemBuilder: (_, __) => Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                width: 140.0,
+                height: 130.0,
+                color: Colors.white,
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 2.0),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 2.0),
+              ),
+              Container(
+                width: 120,
+                height: 8.0,
+                color: Colors.white,
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 2.0),
+              ),
+              Container(
+                width: 25.0,
+                height: 8.0,
+                color: Colors.white,
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ImagesLoadnigItem extends StatelessWidget {
+  const ImagesLoadnigItem({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade100,
+      enabled: true,
+      child: GridView.builder(
+        shrinkWrap: true,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 5,
+            crossAxisSpacing: 5,
+            mainAxisExtent: 100),
+        itemCount: 6,
+        itemBuilder: (_, __) => Container(
+          width: 70.0,
+          height: 100.0,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+}
+
+class VerticalProductLoadingItem extends StatelessWidget {
+  const VerticalProductLoadingItem({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 205.h,
+      child: Row(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: ((context, index) => SizedBox(
+                  height: 155.h,
+                  width: 200.w,
+                  //  width: 150,
+                  //     height: 180,
+                  child: Shimmer.fromColors(
+                    baseColor: Colors.grey.shade300,
+                    highlightColor: Colors.grey.shade100,
+                    enabled: true,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          width: 180.w,
+                          height: 150.h,
+                          color: Colors.white,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 2.0),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 2.0),
+                        ),
+                        Container(
+                          width: 150.w,
+                          height: 8.0,
+                          color: Colors.white,
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 2.0),
+                        ),
+                        Container(
+                          width: 25.0,
+                          height: 8.0,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
+                  ))),
+              itemCount: 6,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

@@ -24,8 +24,7 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage>
-    with AutomaticKeepAliveClientMixin {
+class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     // TODO: implement initState
@@ -59,9 +58,9 @@ class _ProfilePageState extends State<ProfilePage>
                   },
                 ),
                 title: CustomText(
-                  "Profile",
+                  "الملف الشخصي",
                   color: AppColors.white,
-                  textStyleEnum: TextStyleEnum.title,
+                  fontsize: 20,
                 ),
                 centerTitle: true,
               ),
@@ -71,9 +70,11 @@ class _ProfilePageState extends State<ProfilePage>
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
                         child: NetworkImagesWidgets(
-                          Utiles.currentUser.image ?? '',
+                          state is ImageSuccsed
+                              ? Utiles.image
+                              : Utiles.currentUser.image ?? '',
                           width: 100,
                         )),
                     Row(
@@ -103,25 +104,25 @@ class _ProfilePageState extends State<ProfilePage>
                     LoginTextField(
                       keyboardType: TextInputType.text,
                       controller: nameController,
-                      label: 'Name',
+                      label: 'الاسم',
                       validate: Validation().defaultValidation,
                     ),
                     LoginTextField(
                       keyboardType: TextInputType.number,
                       controller: ageController,
-                      label: 'Age',
+                      label: 'السن',
                       validate: Validation().defaultValidation,
                     ),
                     LoginTextField(
                       keyboardType: TextInputType.phone,
                       controller: phoneController,
-                      label: 'Phone',
+                      label: 'رقم الهاتف',
                       validate: Validation().defaultValidation,
                     ),
                     LoginTextField(
                       keyboardType: TextInputType.emailAddress,
                       controller: emailController,
-                      label: 'Email',
+                      label: 'البريد الالكتروني',
                       validate: Validation().emailValidation,
                     ),
                     const SizedBox(
@@ -140,7 +141,7 @@ class _ProfilePageState extends State<ProfilePage>
                               fcmToken: Utiles.FCMToken);
                           await cubit.updateUserData(patientModel, context);
                         },
-                        text: 'update',
+                        text: 'تحديث البيانات',
                         background: AppColors.buttonColor,
                         width: 300.w),
                   ],
@@ -148,8 +149,4 @@ class _ProfilePageState extends State<ProfilePage>
               )));
         });
   }
-
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
 }

@@ -45,33 +45,33 @@ class _SignUpPageState extends State<SignUpPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CustomText(
-                    "Sign Up",
-                    fontsize: 65,
+                    "تسجيل جديد",
+                    fontsize: 50,
                     color: AppColors.black,
                     weight: FontWeight.bold,
                   ),
                   LoginTextField(
                     keyboardType: TextInputType.text,
                     controller: nameController,
-                    label: 'Name',
+                    label: 'الاسم',
                     validate: Validation().defaultValidation,
                   ),
                   LoginTextField(
                     keyboardType: TextInputType.number,
                     controller: ageController,
-                    label: 'Age',
+                    label: 'العمر',
                     validate: Validation().defaultValidation,
                   ),
                   LoginTextField(
                     keyboardType: TextInputType.phone,
                     controller: phoneController,
-                    label: 'Phone',
+                    label: 'رقم الهاتف',
                     validate: Validation().defaultValidation,
                   ),
                   LoginTextField(
                     keyboardType: TextInputType.emailAddress,
                     controller: emailController,
-                    label: 'Email',
+                    label: 'البريد الالكتروني',
                     validate: Validation().emailValidation,
                   ),
                   const SizedBox(
@@ -80,7 +80,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   LoginTextField(
                     keyboardType: TextInputType.visiblePassword,
                     controller: passwordController,
-                    label: 'Password',
+                    label: 'كلمة المرور',
                     validate: Validation().passwordValidation,
                   ),
                   const SizedBox(
@@ -99,13 +99,13 @@ class _SignUpPageState extends State<SignUpPage> {
                               patientModel, passwordController.text, context);
                         }
                       },
-                      text: 'Sign Up',
+                      text: 'تسجيل',
                       background: AppColors.buttonColor,
                       width: 300.w),
                   Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: CustomText(
-                      "Or",
+                      "او",
                       color: AppColors.black,
                       fontsize: 18,
                     ),
@@ -114,6 +114,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     onPressed: () async {
                       await cubit.registerByGoogle(context);
                     },
+                    text: 'تسجيل جديد بواسطه جوجل',
                     style: AuthButtonStyle(
                       iconType: AuthIconType.secondary,
                     ),
@@ -125,7 +126,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       CustomText(
-                        "If you already have an Account ?",
+                        "اذا كنت تمتلك حساب بالفعل",
                         color: AppColors.greyText,
                         fontsize: 18,
                       ),
@@ -134,7 +135,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           navigate(context: context, route: SignIn());
                         },
                         child: CustomText(
-                          " Login",
+                          " تسجيل الدخول",
                           weight: FontWeight.bold,
                           color: AppColors.greyText,
                           fontsize: 18,

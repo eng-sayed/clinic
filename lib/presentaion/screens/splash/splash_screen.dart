@@ -4,6 +4,7 @@ import 'package:clinic/presentaion/screens/auth/screens/sign_up.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/themes/colors.dart';
+import '../../../core/utils/firebase_message.dart';
 import '../../components/navigator.dart';
 import '../../layout/layout.dart';
 import '../home/home.dart';
@@ -21,6 +22,8 @@ class _SplashScreenState extends State<SplashScreen> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       // final splashCubit = SplashCubit.get(context);
       // splashCubit.getToken();
+      await FBMessging.initUniLinks();
+
       await _navigateToHome();
     });
     // FireBaseMessaging().initUniLinks();

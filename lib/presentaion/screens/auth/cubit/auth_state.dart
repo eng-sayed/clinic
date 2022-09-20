@@ -16,3 +16,5 @@ class LoginLoading extends AuthState {}
 class Loginsucess extends AuthState {}
 
 class LoginError extends AuthState {}
+
+class VisiabilitySuceed extends AuthState {}

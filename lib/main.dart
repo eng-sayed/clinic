@@ -1,5 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:clinic/presentaion/screens/auth/cubit/auth_cubit.dart';
+import 'package:clinic/presentaion/screens/booking.dart/cubit/booking_cubit.dart';
+import 'package:clinic/presentaion/screens/home/cubit/home_cubit.dart';
 import 'package:clinic/presentaion/screens/profile/cubit/profile_cubit.dart';
 import 'package:clinic/presentaion/screens/splash/splash_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -24,11 +26,11 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await FBMessging.initUniLinks();
+  // await FBMessging.initUniLinks();
   FirebaseMessaging.onBackgroundMessage(
       FBMessging.firebaseMessagingBackgroundHandler);
   runApp(EasyLocalization(
-      startLocale: Locale('en', 'US'),
+      startLocale: Locale('ar', 'EG'),
       supportedLocales: [
         Locale('ar', 'EG'),
         Locale('en', 'US'),
@@ -49,6 +51,12 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<AuthCubit>(
           create: (context) => AuthCubit(),
+        ),
+        BlocProvider<BookingCubit>(
+          create: (context) => BookingCubit(),
+        ),
+        BlocProvider<HomeCubit>(
+          create: (context) => HomeCubit(),
         ),
         BlocProvider<SplashCubit>(
           create: (context) => SplashCubit(),

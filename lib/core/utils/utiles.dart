@@ -5,5 +5,6 @@ class Utiles {
   static ThemeMode appMode = ThemeMode.light;
   static String UID = '';
   static String FCMToken = '';
+  static String image = '';
   static PatientModel currentUser = PatientModel();
 }

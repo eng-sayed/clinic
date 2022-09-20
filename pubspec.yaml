@@ -50,6 +50,9 @@ dependencies:
   easy_localization: ^3.0.1
   bot_toast: ^4.0.3
   image_picker: ^0.8.5+3
+  carousel_slider: ^4.1.1
+  shimmer: ^2.0.0
+  fluttertoast: ^8.0.9
 
 dev_dependencies:
   flutter_test:

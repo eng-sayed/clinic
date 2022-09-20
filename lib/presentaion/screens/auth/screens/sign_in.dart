@@ -2,6 +2,7 @@ import 'package:auth_buttons/auth_buttons.dart';
 import 'package:clinic/core/themes/colors.dart';
 import 'package:clinic/core/utils/responsive.dart';
 import 'package:clinic/core/utils/validation.dart';
+import 'package:clinic/presentaion/screens/auth/screens/phone_auth.dart';
 import 'package:clinic/presentaion/screens/auth/screens/sign_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -40,8 +41,8 @@ class _SignInState extends State<SignIn> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CustomText(
-                    "Sign In",
-                    fontsize: 35,
+                    "تسجيل الدخول",
+                    fontsize: 50,
                     color: AppColors.black,
                     weight: FontWeight.bold,
                   ),
@@ -54,7 +55,7 @@ class _SignInState extends State<SignIn> {
                   LoginTextField(
                     keyboardType: TextInputType.emailAddress,
                     controller: emailController,
-                    label: 'Email',
+                    label: 'البريد الالكتروني',
                     validate: Validation().emailValidation,
                   ),
                   const SizedBox(
@@ -63,7 +64,7 @@ class _SignInState extends State<SignIn> {
                   LoginTextField(
                     keyboardType: TextInputType.visiblePassword,
                     controller: passwordController,
-                    label: 'Password',
+                    label: 'كلمه المرور',
                     validate: Validation().passwordValidation,
                   ),
                   const SizedBox(
@@ -76,18 +77,29 @@ class _SignInState extends State<SignIn> {
                               passwordController.text, context);
                         }
                       },
-                      text: 'Sign In',
+                      text: 'تسجيل الدخول',
                       background: AppColors.buttonColor,
                       width: 300.w),
                   Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: CustomText(
-                      "Or",
+                      "او",
                       color: AppColors.black,
                       fontsize: 18,
                     ),
                   ),
+                  defaultButton(
+                      function: () {
+                        navigate(context: context, route: PhoneLogin());
+                      },
+                      text: 'تسجيل بواسطه الهاتف',
+                      background: AppColors.buttonColor,
+                      width: 300.w),
+                  SizedBox(
+                    height: 15,
+                  ),
                   GoogleAuthButton(
+                    text: 'تسجيل الدخول بواسطه جوجل',
                     onPressed: () async {
                       await cubit.loginByGoogle(context);
                     },
@@ -102,7 +114,7 @@ class _SignInState extends State<SignIn> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       CustomText(
-                        "If you don't have an Account ?",
+                        "الا تملك بريد الكتروني",
                         color: AppColors.greyText,
                         fontsize: 18,
                       ),
@@ -111,7 +123,7 @@ class _SignInState extends State<SignIn> {
                           navigate(context: context, route: SignUpPage());
                         },
                         child: CustomText(
-                          " Register",
+                          " تسجيل جديد",
                           weight: FontWeight.bold,
                           color: AppColors.greyText,
                           fontsize: 18,

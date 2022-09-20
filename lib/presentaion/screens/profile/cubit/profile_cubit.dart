@@ -34,6 +34,11 @@ class ProfileCubit extends Cubit<ProfileState> {
     String fileName = DateTime.now().millisecondsSinceEpoch.toString();
     MyLoading.show(context);
     try {
+      if (Utiles.currentUser.image != null) {
+        await firebase_storage.FirebaseStorage.instance
+            .refFromURL(Utiles.currentUser.image!)
+            .delete();
+      }
       firebase_storage.TaskSnapshot storageTaskSnapshot = await firebase_storage
           .FirebaseStorage.instance
           .ref(fileName)
@@ -45,15 +50,14 @@ class ProfileCubit extends Cubit<ProfileState> {
           .update({
         'image': imageUrl,
       });
-      await FirebaseFirestore.instance
-          .collection("patient")
-          .doc(Utiles.UID)
-          .get()
-          .then((value) {
-        final user = PatientModel.fromMap(value.data()!);
-        CacheHelper.saveData(key: 'user', value: jsonEncode(user));
-        Utiles.currentUser = user;
-      });
+
+      Utiles.currentUser = Utiles.currentUser.copyWith(image: imageUrl);
+      Utiles.image = Utiles.currentUser.image!;
+      CacheHelper.saveData(key: 'user', value: jsonEncode(Utiles.currentUser));
+      emit(ImageSuccsed());
+
+      print(jsonDecode(CacheHelper.loadData(key: 'user')));
+
       MyLoading.dismis(context);
       OverLays.snack(context,
           text: "update_profile_successed", state: SnakState.success);

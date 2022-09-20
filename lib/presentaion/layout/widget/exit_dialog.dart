@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../core/themes/colors.dart';
 import '../../components/customtext.dart';
@@ -17,7 +20,12 @@ class ExitDialog extends StatelessWidget {
         TextButton(
           child: CustomText("yes".tr(), color: AppColors.primiry),
           onPressed: () async {
-            Navigator.of(context).pop(true);
+            if (Platform.isAndroid) {
+              SystemNavigator.pop();
+            } else if (Platform.isIOS) {
+              exit(0);
+            }
+            //Navigator.of(context).pop(true);
           },
         ),
         TextButton(

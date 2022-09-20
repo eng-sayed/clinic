@@ -32,10 +32,12 @@ class CacheHelper {
     return await sharedPreferences.remove(key);
   }
 
-  static Future<bool> resetShared() async {
+  static resetShared() async {
+    removeData(key: 'fcmtoken');
+    removeData(key: 'uid');
+    removeData(key: 'user');
     Utiles.UID = '';
     Utiles.FCMToken = '';
     Utiles.currentUser = PatientModel();
-    return await sharedPreferences.clear();
   }
 }

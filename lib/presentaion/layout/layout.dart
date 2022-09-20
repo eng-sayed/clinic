@@ -32,52 +32,55 @@ class _HomeLayoutState extends State<HomeLayout>
     return BlocConsumer<HomeLayoutCubit, HomeLayoutStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          return WillPopScope(
-            onWillPop: () async {
-              return await showDialog(
-                  context: context, builder: (context) => ExitDialog());
-            },
-            child: Container(
-              color: AppColors.primiry,
-              child: SafeArea(
-                top: false,
-                child: Scaffold(
-                  // floatingActionButtonLocation:
-                  //     FloatingActionButtonLocation.centerDocked,
-                  // floatingActionButton: MyFloatActionButton(),
-                  extendBody: true,
-                  // appBar:
-                  //     // cubit.tabController.index == 3
-                  //     //     ? null
-                  //     //     :
-                  //     AppBar(
-                  //   title: Image(
-                  //     color: AppColors.white,
-                  //     image: AssetImage(
-                  //       "assets/images/logo.png",
-                  //     ),
-                  //     height: 50,
-                  //   ),
-                  //   centerTitle: true,
-                  //   // leading: IconButton(
-                  //   //   icon: Icon(Ionicons.menu),
-                  //   //   onPressed: () {
-                  //   //     zoomDrawerController.toggle?.call();
-                  //   //   },
-                  //   // ),
-                  // ),
-                  body: TabBarView(
-                    controller: cubit.tabController,
-                    physics: NeverScrollableScrollPhysics(),
-                    children: [
-                      Home(),
-                      ProfilePage(),
-                    ],
-                  ),
-                  bottomNavigationBar: CustomBottomNavBar(cubit),
+          return
+              //  WillPopScope(
+              //   onWillPop: () async {
+              //     return await showDialog(
+              //         context: context, builder: (context) => ExitDialog());
+              //   },
+              //   child:
+
+              Container(
+            color: AppColors.primiry,
+            child: SafeArea(
+              top: false,
+              child: Scaffold(
+                // floatingActionButtonLocation:
+                //     FloatingActionButtonLocation.centerDocked,
+                // floatingActionButton: MyFloatActionButton(),
+                extendBody: true,
+                // appBar:
+                //     // cubit.tabController.index == 3
+                //     //     ? null
+                //     //     :
+                //     AppBar(
+                //   title: Image(
+                //     color: AppColors.white,
+                //     image: AssetImage(
+                //       "assets/images/logo.png",
+                //     ),
+                //     height: 50,
+                //   ),
+                //   centerTitle: true,
+                //   // leading: IconButton(
+                //   //   icon: Icon(Ionicons.menu),
+                //   //   onPressed: () {
+                //   //     zoomDrawerController.toggle?.call();
+                //   //   },
+                //   // ),
+                // ),
+                body: TabBarView(
+                  controller: cubit.tabController,
+                  physics: NeverScrollableScrollPhysics(),
+                  children: [
+                    Home(),
+                    ProfilePage(),
+                  ],
                 ),
+                bottomNavigationBar: CustomBottomNavBar(cubit),
               ),
             ),
+            //  ),
           );
         });
   }

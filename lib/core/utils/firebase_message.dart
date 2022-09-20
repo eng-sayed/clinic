@@ -46,11 +46,11 @@ class FBMessging {
       print(token);
       CacheHelper.saveData(key: 'fcmtoken', value: token ?? '');
       Utiles.FCMToken = token!;
-      Utiles.UID = CacheHelper.loadData(key: 'uid') ?? '';
-      print(
-          PatientModel.fromJson(jsonDecode(CacheHelper.loadData(key: 'user'))));
-      Utiles.currentUser =
-          PatientModel.fromJson(jsonDecode(CacheHelper.loadData(key: 'user')));
     });
+    Utiles.UID = CacheHelper.loadData(key: 'uid') ?? '';
+    // print(
+    //     PatientModel.fromJson(jsonDecode(CacheHelper.loadData(key: 'user'))));
+    // var x = jsonDecode(CacheHelper.loadData(key: 'user')) ?? PatientModel();
+    // Utiles.currentUser = PatientModel.fromMap(x ?? Map<String, dynamic>);
   }
 }
